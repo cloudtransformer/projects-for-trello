@@ -1,18 +1,14 @@
 {
 	"name": "Projects for Trello",
 	"version": "1.0",
-	"description": "Adds Projects to your Trello",
+	"description": "Adds project labels to your Trello Boards",
 	"content_scripts": [
 		{
 			"matches": ["https://trello.com/*"],
-			"js": ["jquery-1.7.1.min.js","trelloprojects.js"],
+			"js": ["jquery-1.7.1.min.js", "trelloprojects.js"],
 			"css": ["trelloprojects.css"]
 		}
 	],
 	"manifest_version" : 2,
-    "icons": { "128": "trello-projects-icon.png" },
-    "web_accessible_resources": [
-	    "images/storypoints-icon.png",
-	    "images/points-done.png"
-    ]
+    "icons": { "128": "trello-projects-icon.png" }
 }
