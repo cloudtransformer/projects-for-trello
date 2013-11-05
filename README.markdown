@@ -1,6 +1,7 @@
 Projects for Trello
 ===========
-Projects for Trello adds functionality to the awesome trello.com for use in multiple project boards.
+[Projects for Trello](https://chrome.google.com/webstore/detail/projects-for-trello/mholjhodapabhdbchonjjoecmfhobfoa) 
+adds functionality to the awesome trello.com for use in multiple project boards.
 
 Setup
 -----
