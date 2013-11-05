@@ -16,11 +16,11 @@ allows you to add project labels to cards.
 
 Project names are written in between parentheses in the title of a card.
 For example: {Project} Upon an error I want to see an awesome 404 page.
-Upon saving the card, Trello Projects picks up the assigned project name and shows it
+Upon saving the card, Projects for Trello picks up the assigned project name and shows it
 as a badge in the lower left corner of the card.
 
 Credits
 -------
-Most, if not all credit goes to [TrelloScrum](https://github.com/Q42/TrelloScrum) which was 
+Most, if not all credit goes to [Scrum for Trello](https://github.com/Q42/TrelloScrum) which was 
 was developed by [Marcel Duin](http://webglmarcel.q42.net/) and [Jasper Kaizer](https://twitter.com/jkaizer). 
-This project is a re-work of their original extension to handle project labels.
+This project is a rework of their original extension to handle project labels.
