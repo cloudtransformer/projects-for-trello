@@ -10,8 +10,8 @@ repository and load the Projects for Trello folder as an unpacked extension.
 
 How does it work?
 -----------------
-Trello Projects is a Chrome Extension that adds a little bit of functionality
-to Trello.com to make it perfect to use with multiple projects. Trello Projects
+Projects for Trello is a Chrome Extension that adds a little bit of functionality
+to Trello.com to make it perfect to use with multiple projects. Projects for Trello
 allows you to add project labels to cards.
 
 Project names are written in between parentheses in the title of a card.
