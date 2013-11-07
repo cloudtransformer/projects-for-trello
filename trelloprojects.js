@@ -58,7 +58,7 @@ function ListCard(el) {
         return;
     el.listCard = this;
     
-    var regexp = /((?:^|\s))\{([a-zA-Z0-9\s]+)(\})\s?/m;
+    var regexp = /((?:^|\s))\{([a-zA-Z0-9£$€ßçÇáàâäæãåèéêëîïíìôöòóøõûüùúÿñÁÀÂÄÆÃÅÈÉÊËÎÏÍÌÔÖÒÓØÕÛÜÙÚŸÑðÐαβγδεζηθικλμνξοπρςστυφχψω\s]+)(\})\s?/m;
     var label = -1;
     var parsed;
     var that = this;
