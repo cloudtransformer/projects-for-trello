@@ -5,9 +5,9 @@ $(function() {
 });
 
 document.body.addEventListener('DOMNodeInserted', function(e) {
-    if (e.target.id == 'board') 
+    if (e.target.id == 'board')
         setTimeout(showLabels);
-    else if ($(e.target).hasClass('list')) 
+    else if ($(e.target).hasClass('list'))
         showLabels();
 });
 
@@ -16,7 +16,7 @@ function showLabels() {
     clearTimeout(labelTimeout);
     labelTimeout = setTimeout(function() {
         $('.list').each(function() {
-            if (!this.list) 
+            if (!this.list)
                 new List(this);
         });
     });
@@ -26,15 +26,15 @@ function List(el) {
     if (el.list)
         return;
     el.list = this;
-    
+
     var $list = $(el);
     var busy = false;
     var to;
     var to2;
-    
+
     function readCard($c) {
         if ($c.target) {
-            if (!/list-card/.test($c.target.className)) 
+            if (!/list-card/.test($c.target.className))
                 return;
             $c = $($c.target).filter('.list-card:not(.placeholder)');
         }
@@ -45,70 +45,89 @@ function List(el) {
                 setTimeout(this.listCard.refresh);
         });
     };
-    
+
     $list.on('DOMNodeInserted', readCard);
-    
+
     setTimeout(function() {
         readCard($list.find('.list-card'));
     });
 };
 
 function ListCard(el) {
-    if (el.listCard) 
+    if (el.listCard)
         return;
     el.listCard = this;
-    
-    var regexp = /((?:^|\s))\{([a-zA-Z0-9\s]+)(\})\s?/m;
+
+    var regexp = /\{([^{}]+)\}/;
     var label = -1;
     var parsed;
     var that = this;
     var busy = false;
     var ptitle = '';
     var $card = $(el);
-    var $badge = $('<div class="badge project" />');
     var to;
     var to2;
 
     this.refresh = function() {
-        if (busy) 
+        if (busy)
             return;
         busy = true;
-        
+
         clearTimeout(to);
         to = setTimeout(function() {
             var $title = $card.find('a.list-card-title');
             if(!$title[0])
                 return;
-            
+
             var title = $title[0].childNodes[1].textContent;
-            if (title) 
+            if (title)
                 el._title = $title;
-            
+
             if (title != ptitle) {
                 ptitle = title;
                 parsed = title.match(regexp);
-                label = parsed ? parsed[2] : -1;
+                label = parsed ? parsed : -1;
+                if(label != -1){
+                    $(".badge").remove();
+                }
             }
-            
+
             clearTimeout(to2);
-            
+
             to2 = setTimeout(function() {
-                $badge.text(that.label).prependTo($card.find('.badges'));
-                $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].text.replace(regexp,'$1'));
+
+
+                function recursiveReplace()
+                {
+                    if(label != -1){
+                        $('<div class="badge project" />').text(that.label[1]).prependTo($card.find('.badges'));
+                        //TODO below doesn't get rid of curly brace text when its added or modified
+                        $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].text.replace(label[0],''));
+                        parsed = el._title.match(regexp);
+                        label = parsed ? parsed : -1;
+                        if(label != -1){
+                            el._title = $title;
+                            recursiveReplace();
+                        }
+                    }
+                };
+                recursiveReplace();
+
                 var list = $card.closest('.list');
                 busy = false;
             })
         });
     };
 
+
     this.__defineGetter__('label', function() {
         return parsed ? label : '';
     });
-    
+
     el.addEventListener('DOMNodeInserted', function(e) {
         if (/card-short-id/.test(e.target.className) && !busy)
             that.refresh();
     });
-    
+
     setTimeout(that.refresh);
 };
