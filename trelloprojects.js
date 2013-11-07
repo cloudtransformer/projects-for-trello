@@ -93,10 +93,13 @@ function ListCard(el) {
 
             to2 = setTimeout(function() {
 
+                $(".badge").remove();
+
                 function recursiveReplace()
                 {
                     if(label != -1){
                         $('<div class="badge project" />').text(that.label[1]).prependTo($card.find('.badges'));
+                        //TODO below doesn't get rid of curly brace text when its added or modified
                         $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].text.replace(label[0],''));
                         parsed = el._title.match(regexp);
                         label = parsed ? parsed : -1;
