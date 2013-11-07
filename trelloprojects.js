@@ -87,13 +87,15 @@ function ListCard(el) {
                 ptitle = title;
                 parsed = title.match(regexp);
                 label = parsed ? parsed : -1;
+                if(label != -1){
+                    $(".badge").remove();
+                }
             }
 
             clearTimeout(to2);
 
             to2 = setTimeout(function() {
 
-                $(".badge").remove();
 
                 function recursiveReplace()
                 {
