@@ -72,6 +72,8 @@ function ListCard(el) {
         if (busy)
             return;
         busy = true;
+        
+        $card.find(".project").remove();
 
         clearTimeout(to);
         to = setTimeout(function() {
@@ -87,9 +89,6 @@ function ListCard(el) {
                 ptitle = title;
                 parsed = title.match(regexp);
                 label = parsed ? parsed : -1;
-                if(label != -1){
-                    $card.find(".project").remove();
-                }
             }
 
             clearTimeout(to2);
