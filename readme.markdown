@@ -17,7 +17,7 @@ allows you to add project labels to cards.
 Project names are written in between parentheses in the title of a card.
 For example: {Project} Upon an error I want to see an awesome 404 page.
 Upon saving the card, Projects for Trello picks up the assigned project name and shows it
-as a badge in the lower left corner of the card.
+as a badge in the lower left corner of the card. Projects for Trello also supports multiple labels per card.
 
 Credits
 -------
