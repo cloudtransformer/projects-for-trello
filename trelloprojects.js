@@ -88,7 +88,7 @@ function ListCard(el) {
                 parsed = title.match(regexp);
                 label = parsed ? parsed : -1;
                 if(label != -1){
-                    $(".badge").remove();
+                    $card.find(".project").remove();
                 }
             }
 
