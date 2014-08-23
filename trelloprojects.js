@@ -98,7 +98,7 @@ function ListCard(el) {
             to2 = setTimeout(function() {
                 function recursiveReplace() {
                     if (label != -1) {
-                        $('<div class="badge project" />').text(that.label[1]).prependTo($card.find('.badges'));
+                        $('<div class="badge project" />').text(that.label[1]).appendTo($card.find('.badges'));
                         if(title != ptitle){
 					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
                         }
