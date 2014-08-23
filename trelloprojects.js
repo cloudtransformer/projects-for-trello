@@ -75,20 +75,24 @@ function ListCard(el) {
 
         clearTimeout(to);
         to = setTimeout(function() {
-            var $title = $card.find('a.list-card-title');
-            if(!$title[0])
+            var $title=$card.find('a.list-card-title');
+			if(!$title[0])
                 return;
-
-            var title = $title[0].childNodes[1].textContent;
-            if (title)
-                el._title = $title;
+            
+			var title = $title[0].childNodes[1].textContent;
+			if (title) 
+                el._title = title;
 
 			var ptitle = $title.data('parsed-title'); 
 			if (title != ptitle){
+                if(title != ptitle){
+					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
+                        }
 				parsed=title.match(regexp);
 				label=parsed ? parsed : -1;
 			} else {
 				var origTitle = $title.data('orig-title');
+                el._title = origTitle;
 				parsed=origTitle.match(regexp);
 				label=parsed ? parsed : -1;
 			}
@@ -99,18 +103,15 @@ function ListCard(el) {
                 function recursiveReplace() {
                     if (label != -1) {
                         $('<div class="badge project" />').text(that.label[1]).appendTo($card.find('.badges'));
-                        if(title != ptitle){
-					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
-                        }
-                        ptitle = $.trim(el._title[0].childNodes[1].textContent.replace(label[0],''));
+                        ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
                         $title.data('parsed-title', ptitle);
                         $title[0].childNodes[1].textContent = ptitle;
                         
-                        parsed = el._title.match(regexp);
+                        parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
                         if (label != -1) {
-                            el._title = $title;
+                            el._title = ptitle;
                             recursiveReplace();
                         }
                     }
