@@ -83,11 +83,15 @@ function ListCard(el) {
             if (title)
                 el._title = $title;
 
-            if (title != ptitle) {
-                ptitle = title;
-                parsed = title.match(regexp);
-                label = parsed ? parsed : -1;
-            }
+			var ptitle = $title.data('parsed-title'); 
+			if (title != ptitle){
+				parsed=title.match(regexp);
+				label=parsed ? parsed : -1;
+			} else {
+				var origTitle = $title.data('orig-title');
+				parsed=origTitle.match(regexp);
+				label=parsed ? parsed : -1;
+			}
 
             clearTimeout(to2);
 
@@ -95,7 +99,14 @@ function ListCard(el) {
                 function recursiveReplace() {
                     if (label != -1) {
                         $('<div class="badge project" />').text(that.label[1]).prependTo($card.find('.badges'));
-                        $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].childNodes[1].textContent.replace(label[0],''));
+                        if(title != ptitle){
+					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
+                        }
+                        ptitle = $.trim(el._title[0].childNodes[1].textContent.replace(label[0],''));
+                        el._title = ptitle;
+                        $title.data('parsed-title', ptitle);
+                        $title[0].childNodes[1].textContent = ptitle;
+                        
                         parsed = el._title.match(regexp);
                         label = parsed ? parsed : -1;
                         if (label != -1) {
