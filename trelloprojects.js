@@ -29,8 +29,6 @@ function List(el) {
 
     var $list = $(el);
     var busy = false;
-    var to;
-    var to2;
 
     function readCard($c) {
         if ($c.target) {
@@ -97,7 +95,7 @@ function ListCard(el) {
                 function recursiveReplace() {
                     if (label != -1) {
                         $('<div class="badge project" />').text(that.label[1]).prependTo($card.find('.badges'));
-                        $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].text.replace(label[0],''));
+                        $title[0].childNodes[1].textContent = el._title = $.trim(el._title[0].childNodes[1].textContent.replace(label[0],''));
                         parsed = el._title.match(regexp);
                         label = parsed ? parsed : -1;
                         if (label != -1) {
