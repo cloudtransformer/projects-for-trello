@@ -4,6 +4,9 @@ $(function() {
     showLabels();
 });
 
+
+
+
 document.body.addEventListener('DOMNodeInserted', function(e) {
     if (e.target.id == 'board')
         setTimeout(showLabels);
@@ -21,6 +24,8 @@ function showLabels() {
         });
     });
 };
+
+
 
 function List(el) {
     if (el.list)
@@ -70,7 +75,7 @@ function ListCard(el) {
         if (busy)
             return;
         busy = true;
-        
+
         $card.find(".project").remove();
 
         clearTimeout(to);
@@ -78,12 +83,12 @@ function ListCard(el) {
             var $title=$card.find('a.list-card-title');
 			if(!$title[0])
                 return;
-            
+
 			var title = $title[0].childNodes[1].textContent;
-			if (title) 
+			if (title)
                 el._title = title;
 
-			var ptitle = $title.data('parsed-title'); 
+			var ptitle = $title.data('parsed-title');
 			if (title != ptitle){
                 if(title != ptitle){
 					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
@@ -102,18 +107,36 @@ function ListCard(el) {
             to2 = setTimeout(function() {
                 function recursiveReplace() {
                     if (label != -1) {
-                        $('<div class="badge project" />').text(that.label[1]).appendTo($card.find('.badges'));
+
+                        var tmp = $('<div class="badge project" />');
+                        tmp.text(that.label[1]).appendTo($card.find('.badges'));
                         ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
                         $title.data('parsed-title', ptitle);
                         $title[0].childNodes[1].textContent = ptitle;
-                        
+
                         parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
+                        chrome.storage.sync.get({
+                            projectName: tmp.text(),
+                            colorHex: "#801b00"
+                          }, function(items) {
+                            // default color #801b00
+                            console.log(items);
+                            if (tmp!=undefined)
+                                tmp.attr("style", "background-color: " + items.colorHex + " !important");
+                          });
+
+
+
+                        //tmp.css("background-color", colorArray[tmp.text()] );
                         if (label != -1) {
                             el._title = ptitle;
                             recursiveReplace();
                         }
+
+
+
                     }
                 };
                 recursiveReplace();
