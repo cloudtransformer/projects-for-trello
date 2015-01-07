@@ -5,6 +5,9 @@ $(function() {
 });
 
 
+var colorList = ["blue", "red", "green", "MediumVioletRed ", "gray", "orange"];
+var defaultColor = "#801b00";
+var usedColors = colorList.slice(0);
 
 
 document.body.addEventListener('DOMNodeInserted', function(e) {
@@ -117,16 +120,41 @@ function ListCard(el) {
 
                         parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
-                        chrome.storage.sync.get({
-                            projectName: tmp.text(),
-                            colorHex: "#801b00"
-                          }, function(items) {
-                            // default color #801b00
-                            console.log(items);
-                            if (tmp!=undefined)
-                                tmp.attr("style", "background-color: " + items.colorHex + " !important");
-                          });
 
+
+
+                        if (tmp!=undefined && tmp.text()!="")
+                        {
+                            var _tmp = {};
+                            _tmp[tmp.text()] = defaultColor;
+
+                            chrome.storage.sync.get(_tmp,
+                                function(items) {
+                                // default color #801b00
+                                console.log(items[tmp.text()]);
+                                var colorSet = items[tmp.text()];
+                                if (items[tmp.text()]==defaultColor)
+                                {
+                                    console.log("defaultColor")
+                                    var colorSet=usedColors.pop();
+                                    console.log()
+                                    if (colorSet==undefined){
+                                        usedColors = colorList.slice(0);
+                                        colorSet = usedColors.pop();
+
+                                    }
+                                    var _tmp = {}
+                                    _tmp[tmp.text()] = colorSet;
+                                    chrome.storage.sync.set(_tmp, function() {
+
+                                      });
+
+                                }
+                                console.log(colorSet );
+                                if (tmp!=undefined)
+                                    tmp.attr("style", "background-color: " + colorSet+ " !important");
+                              });
+                        }
 
 
                         //tmp.css("background-color", colorArray[tmp.text()] );

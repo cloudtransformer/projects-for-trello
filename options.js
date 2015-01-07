@@ -2,10 +2,9 @@
 function save_options() {
   var projectName = document.getElementById('projectName').value;
   var colorHex = document.getElementById('colorHex').value;
-  chrome.storage.sync.set({
-    projectName: projectName,
-    colorHex: colorHex
-  }, function() {
+  var _tmp = {}
+  _tmp[projectName] = colorHex
+  chrome.storage.sync.set(_tmp, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
@@ -19,10 +18,7 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
-  chrome.storage.sync.get({
-    projectName: 'test',
-    colorHex: true
-  }, function(items) {
+  chrome.storage.sync.get(null, function(items) {
     // TODO: work on
     console.log(items);
   });
