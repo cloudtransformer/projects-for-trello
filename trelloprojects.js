@@ -28,6 +28,12 @@ function showLabels() {
     });
 };
 
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
 
 
 function List(el) {
@@ -131,15 +137,15 @@ function ListCard(el) {
                             chrome.storage.sync.get(_tmp,
                                 function(items) {
                                 // default color #801b00
-                                console.log(items[tmp.text()]);
+
                                 var colorSet = items[tmp.text()];
                                 if (items[tmp.text()]==defaultColor)
                                 {
-                                    console.log("defaultColor")
+
                                     var colorSet=usedColors.pop();
-                                    console.log()
+
                                     if (colorSet==undefined){
-                                        usedColors = colorList.slice(0);
+                                        usedColors = shuffle(colorList.slice(0));
                                         colorSet = usedColors.pop();
 
                                     }
@@ -150,7 +156,7 @@ function ListCard(el) {
                                       });
 
                                 }
-                                console.log(colorSet );
+
                                 if (tmp!=undefined)
                                     tmp.attr("style", "background-color: " + colorSet+ " !important");
                               });
