@@ -1,6 +1,6 @@
 {
 	"name": "Projects for Trello",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Adds project labels to your Trello Boards",
 	"content_scripts": [
 		{
