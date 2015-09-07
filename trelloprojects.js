@@ -79,7 +79,7 @@ function ListCard(el) {
 			if(!$title[0])
                 return;
             
-			var title = $title[0].childNodes[0].textContent;
+			var title = $title[0].childNodes[1].textContent;
 			if (title) 
                 el._title = title;
 
@@ -106,7 +106,7 @@ function ListCard(el) {
                         ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
                         $title.data('parsed-title', ptitle);
-                        $title[0].childNodes[0].textContent = ptitle;
+                        $title[0].childNodes[1].textContent = ptitle;
                         
                         parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
