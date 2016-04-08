@@ -76,26 +76,27 @@ function ListCard(el) {
         clearTimeout(to);
         to = setTimeout(function() {
             var $title=$card.find('a.list-card-title');
-			if(!$title[0])
+            if(!$title[0])
                 return;
             
-			var title = $title[0].childNodes[1].textContent;
-			if (title) 
+            var title = $title[0].childNodes[2].textContent;
+            if (title) 
                 el._title = title;
 
-			var ptitle = $title.data('parsed-title'); 
-			if (title != ptitle){
+            var ptitle = $title.data('parsed-title'); 
+            if (title != ptitle){
+
                 if(title != ptitle){
-					       $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
+                           $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
                         }
-				parsed=title.match(regexp);
-				label=parsed ? parsed : -1;
-			} else {
-				var origTitle = $title.data('orig-title');
+                parsed=title.match(regexp);
+                label=parsed ? parsed : -1;
+            } else {
+                var origTitle = $title.data('orig-title');
                 el._title = origTitle;
-				parsed=origTitle.match(regexp);
-				label=parsed ? parsed : -1;
-			}
+                parsed=origTitle.match(regexp);
+                label=parsed ? parsed : -1;
+            }
 
             clearTimeout(to2);
 
@@ -106,7 +107,7 @@ function ListCard(el) {
                         ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
                         $title.data('parsed-title', ptitle);
-                        $title[0].childNodes[1].textContent = ptitle;
+                        $title[0].childNodes[2].textContent = ptitle;
                         
                         parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
