@@ -75,7 +75,7 @@ function ListCard(el) {
 
         clearTimeout(to);
         to = setTimeout(function() {
-            var $title=$card.find('a.list-card-title');
+            var $title=$card.find('span.list-card-title');
             if(!$title[0])
                 return;
             
