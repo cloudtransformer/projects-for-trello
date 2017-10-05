@@ -1,11 +1,11 @@
 Projects for Trello
 ===========
-[Projects for Trello](https://chrome.google.com/webstore/detail/projects-for-trello/mholjhodapabhdbchonjjoecmfhobfoa) 
+[Projects for Trello](https://chrome.google.com/webstore/detail/projects-for-trello/mholjhodapabhdbchonjjoecmfhobfoa)
 adds functionality to the awesome trello.com for use in multiple project boards.
 
 Setup
 -----
-Projects for Trello is a Chrome extension and you can install it via the Chrome Webstore or clone this 
+Projects for Trello is a Chrome extension and you can install it via the Chrome Webstore or clone this
 repository and load the Projects for Trello folder as an unpacked extension.
 
 How does it work?
@@ -21,6 +21,7 @@ as a badge in the lower left corner of the card. Projects for Trello also suppor
 
 Credits
 -------
-Most, if not all credit goes to [Scrum for Trello](https://github.com/Q42/TrelloScrum) which was 
-was developed by [Marcel Duin](http://webglmarcel.q42.net/) and [Jasper Kaizer](https://twitter.com/jkaizer). 
+Most, if not all credit goes to [Scrum for Trello](https://github.com/Q42/TrelloScrum) which was
+was developed by [Marcel Duin](http://webglmarcel.q42.net/) and [Jasper Kaizer](https://twitter.com/jkaizer).
+Modified by [Skylar Bolton](https://github.com/shadoath)
 This project is a rework of their original extension to handle project labels.
