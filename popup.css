@@ -1,0 +1,19 @@
+.project:empty {
+  display: none;
+}
+.color-swath{
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  display: inline-block;
+}
+.project-name{
+  margin: 2px;
+}
+.delete-button{
+  float: right;
+}
+#save{
+  width: 100%;
+  margin: auto
+}
