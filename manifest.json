@@ -18,7 +18,6 @@
     }
   ],
   "manifest_version" : 2,
-  "options_page": "options.html",
   "permissions": [ "storage" ],
   "icons": { "128": "trello-projects-icon.png" }
 }
