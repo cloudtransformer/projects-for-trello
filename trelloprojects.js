@@ -4,6 +4,12 @@ $(function() {
     showLabels();
 });
 
+
+var colorList = ["blue", "red", "green", "MediumVioletRed ", "gray", "orange"];
+var defaultColor = "#801b00";
+var usedColors = colorList.slice(0);
+
+
 document.body.addEventListener('DOMNodeInserted', function(e) {
     if (e.target.id == 'board')
         setTimeout(showLabels);
@@ -21,6 +27,14 @@ function showLabels() {
         });
     });
 };
+
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
 
 function List(el) {
     if (el.list)
@@ -70,7 +84,7 @@ function ListCard(el) {
         if (busy)
             return;
         busy = true;
-        
+
         $card.find(".project").remove();
 
         clearTimeout(to);
@@ -78,14 +92,14 @@ function ListCard(el) {
             var $title=$card.find('span.list-card-title');
             if(!$title[0])
                 return;
-            
-            var title = $title[0].innerText;
-            if (title) 
+
+            // var title = $title[0].innerText;
+      var title = $title[0].childNodes[1].textContent;
+      if (title)
                 el._title = title;
 
-            var ptitle = $title.data('parsed-title'); 
-            if (title != ptitle){
-
+      var ptitle = $title.data('parsed-title');
+      if (title != ptitle){
                 if(title != ptitle){
                            $title.data('orig-title', title); // store the non-mutilated title (with all of the estimates/time-spent in it).
                         }
@@ -103,18 +117,61 @@ function ListCard(el) {
             to2 = setTimeout(function() {
                 function recursiveReplace() {
                     if (label != -1) {
-                        $('<div class="badge project" />').text(that.label[1]).appendTo($card.find('.badges'));
+
+                        var tmp = $('<div class="badge project" />');
+                        tmp.text(that.label[1]).appendTo($card.find('.badges'));
                         ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
                         $title.data('parsed-title', ptitle);
-                        $title[0].innerText = ptitle;
-                        
+                        // $title[0].innerText = ptitle;
+                        $title[0].childNodes[1].textContent = ptitle;
                         parsed = ptitle.match(regexp);
                         label = parsed ? parsed : -1;
+
+
+
+                        if (tmp!=undefined && tmp.text()!="")
+                        {
+                            var _tmp = {};
+                            _tmp[tmp.text()] = defaultColor;
+
+                            chrome.storage.sync.get(_tmp,
+                                function(items) {
+                                // default color #801b00
+
+                                var colorSet = items[tmp.text()];
+                                if (items[tmp.text()]==defaultColor)
+                                {
+
+                                    var colorSet=usedColors.pop();
+
+                                    if (colorSet==undefined){
+                                        usedColors = shuffle(colorList.slice(0));
+                                        colorSet = usedColors.pop();
+
+                                    }
+                                    var _tmp = {}
+                                    _tmp[tmp.text()] = colorSet;
+                                    chrome.storage.sync.set(_tmp, function() {
+
+                                      });
+
+                                }
+
+                                if (tmp!=undefined)
+                                    tmp.attr("style", "background-color: " + colorSet+ " !important");
+                              });
+                        }
+
+
+                        //tmp.css("background-color", colorArray[tmp.text()] );
                         if (label != -1) {
                             el._title = ptitle;
                             recursiveReplace();
                         }
+
+
+
                     }
                 };
                 recursiveReplace();
