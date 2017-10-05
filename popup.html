@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="/lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery-ui-1.10.4.custom.min.js"></script>
+    <title>Project for Trello - options</title>
+  </head>
+  <body>
+
+    <form>
+      <label>
+        Project Name:
+      </label>
+      <input type="text" id="projectName" placeholder="Trello Extension">
+      <br />
+      <label>
+        Color:
+      </label>
+      <input type="text" id="colorHex" placeholder="red or #00FF00">
+
+      <button id="save">Add</button>
+    </form>
+    <br />
+
+
+    <div id="list">
+
+    </div>
+    <script src="options.js"></script>
+    <style>
+      .color-swath{
+        width: 15px;
+        height: 15px;
+        margin: 2px;
+        display: inline-block;
+      }
+      .project-name{
+        margin: 2px;
+      }
+      .delete-button{
+        float: right;
+      }
+      #save{
+        width: 100%;
+        margin: auto
+      }
+  </body>
+</html>
