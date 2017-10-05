@@ -118,7 +118,8 @@ function ListCard(el) {
                 function recursiveReplace() {
                     if (label != -1) {
 
-                        var tmp = $('<div class="badge project" />');
+                        var tmp = $('<div class="badge project""  />');
+
                         tmp.text(that.label[1]).appendTo($card.find('.badges'));
                         ptitle = $.trim(el._title.replace(label[0],''));
                         el._title = ptitle;
@@ -132,6 +133,7 @@ function ListCard(el) {
 
                         if (tmp!=undefined && tmp.text()!="")
                         {
+                            tmp.addClass(tmp.text());
                             var _tmp = {};
                             _tmp[tmp.text()] = defaultColor;
 
@@ -157,8 +159,7 @@ function ListCard(el) {
                                       });
 
                                 }
-
-                                if (tmp!=undefined)
+ if (tmp!=undefined)
                                     tmp.attr("style", "background-color: " + colorSet+ " !important");
                               });
                         }
