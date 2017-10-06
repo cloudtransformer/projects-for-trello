@@ -12,7 +12,7 @@ var usedColors = colorList.slice(0);
 
 document.body.addEventListener('DOMNodeInserted', function(e) {
   if (e.target.id == 'board')
-    setTimeout(showLabels);
+    setTimeout(showLabels, 1000);
   else if ($(e.target).hasClass('list'))
   showLabels();
 });
@@ -25,7 +25,7 @@ function showLabels() {
       if (!this.list)
         new List(this);
     });
-  });
+  }, 1000);
 };
 
 //+ Jonas Raoni Soares Silva
@@ -93,8 +93,8 @@ function ListCard(el) {
       if(!$title[0])
         return;
 
-      // var title = $title[0].innerText;
-      var title = $title[0].childNodes[1].textContent;
+      var title = $title[0].innerText;
+      // var title = $title[0].childNodes[1].textContent;
       if (title)
         el._title = title;
 
@@ -118,61 +118,20 @@ function ListCard(el) {
         function recursiveReplace() {
           if (label != -1) {
 
-            var tmp = $('<div class="badge project""  />');
-
-            tmp.text(that.label[1]).appendTo($card.find('.badges'));
             ptitle = $.trim(el._title.replace(label[0],''));
             el._title = ptitle;
             $title.data('parsed-title', ptitle);
             // $title[0].innerText = ptitle;
             $title[0].childNodes[1].textContent = ptitle;
+
+            setColor($card, label[1]);
+
             parsed = ptitle.match(regexp);
             label = parsed ? parsed : -1;
-
-
-
-            if (tmp!=undefined && tmp.text()!="")
-              {
-                tmp.addClass(tmp.text());
-                var _tmp = {};
-                _tmp[tmp.text()] = defaultColor;
-
-                chrome.storage.sync.get(_tmp,
-                                        function(items) {
-                                          // default color #801b00
-
-                                          var colorSet = items[tmp.text()];
-                                          if (items[tmp.text()]==defaultColor)
-                                            {
-
-                                              var colorSet=usedColors.pop();
-
-                                              if (colorSet==undefined){
-                                                usedColors = shuffle(colorList.slice(0));
-                                                colorSet = usedColors.pop();
-
-                                              }
-                                              var _tmp = {}
-                                              _tmp[tmp.text()] = colorSet;
-                                              chrome.storage.sync.set(_tmp, function() {
-
-                                              });
-
-                                            }
-                                            if (tmp!=undefined)
-                                              tmp.attr("style", "background-color: " + colorSet+ " !important");
-                                        });
-              }
-
-
-              //tmp.css("background-color", colorArray[tmp.text()] );
-              if (label != -1) {
-                el._title = ptitle;
-                recursiveReplace();
-              }
-
-
-
+            if (label != -1) {
+              el._title = ptitle;
+              recursiveReplace();
+            }
           }
         };
         recursiveReplace();
@@ -183,6 +142,40 @@ function ListCard(el) {
     });
   };
 
+  function setColor(card, label){
+    var card_badge = $('<div class="badge project">');
+    card_badge.text(label).appendTo(card.find('.badges'));
+    if (card_badge!=undefined && card_badge.text()!="") {
+      card_badge.addClass(card_badge.text());
+      var _card_badge = {};
+      _card_badge[card_badge.text()] = defaultColor;
+
+      chrome.storage.sync.get(_card_badge, function(items) {
+        // default color #801b00
+
+        var colorSet = items[card_badge.text()];
+        if (items[card_badge.text()]==defaultColor)
+          {
+
+            var colorSet=usedColors.pop();
+
+            if (colorSet==undefined){
+              usedColors = shuffle(colorList.slice(0));
+              colorSet = usedColors.pop();
+
+            }
+            var _card_badge = {}
+            _card_badge[card_badge.text()] = colorSet;
+            chrome.storage.sync.set(_card_badge, function() {
+
+            });
+
+          }
+          if (card_badge!=undefined)
+            card_badge.attr("style", "background-color: " + colorSet+ " !important");
+      });
+    }
+  }
 
   this.__defineGetter__('label', function() {
     return parsed ? label : '';
@@ -192,6 +185,7 @@ function ListCard(el) {
     if (/card-short-id/.test(e.target.className) && !busy)
       that.refresh();
   });
+
 
   setTimeout(that.refresh);
 };
