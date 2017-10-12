@@ -27,14 +27,18 @@ function restore_options() {
     // TODO: work on
     for (item in items) {
       var node = document.createElement("div");
-      node.innerHTML = "<span class='color-swath' style='background:"+items[item]+";'></span>"+
-        "<label class='project-name'>" + item + "</label>" +
+      node.innerHTML = "<label class='current-project' data-name='"+item+"' data-color='"+items[item]+"'>"+
+        "<span class='color-swath' style='background:"+items[item]+";'></span>"+
+        "<span class='project-name'>" + item + "</span></label>" +
         "<button class='delete-button' data-name='"+item+"'>X</button>";
       document.getElementById("list").appendChild(node);
     }
     $(".delete-button").click(function(){
-      console.log($(this).data("name"));
       delete_option($(this).data("name"));
+    });
+    $(".current-project").click(function(){
+      $('#projectName').val($(this).data("name"))
+      $('#colorHex').val($(this).data("color"))
     });
   });
 }
