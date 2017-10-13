@@ -70,7 +70,7 @@ function import_settings() {
 }
 $(function(){
   restore_options();
-  $('#new-project-name').blur(function(){
+  $('#add').click(function(){
     save_option($('#new-project-name'), $('#new-color'));
   });
   $('#import-export').click(export_settings);
