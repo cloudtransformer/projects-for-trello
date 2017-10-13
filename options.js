@@ -26,8 +26,8 @@ function restore_options() {
     // TODO: work on
     for (item in items) {
       var node = $('<div></div>');
-      node.html("<input type='text' class='spectrum color' value='"+items[item]+"'>" +
-        "<input type='text' class='project-name' value='"+item+"'>" +
+      node.html("<div class='color-name-group'><input type='text' class='spectrum color' value='"+items[item]+"'>" +
+        "<input type='text' class='project-name' value='"+item+"'></div>" +
         "<button class='delete-button' data-name='"+item+"'>X</button>");
       $('#list').append(node);
     }
