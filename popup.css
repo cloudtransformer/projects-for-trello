@@ -1,3 +1,7 @@
+#container {
+  width: 400px;
+  min-height: 300px;
+}
 .project:empty {
   display: none;
 }

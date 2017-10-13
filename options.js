@@ -37,8 +37,9 @@ function restore_options() {
       delete_option($(this).data("name"));
     });
     $(".current-project").click(function(){
-      $('#projectName').val($(this).data("name"))
-      $('#colorHex').val($(this).data("color"))
+      $('#projectName').val($(this).data("name"));
+      $('#colorHex').val($(this).data("color"));
+      $("#colorHex").spectrum("set", $(this).data("color"));
     });
   });
 }
@@ -81,5 +82,15 @@ $(function(){
     setTimeout(function(){
       $("#export-import").attr("placeholder", "");
     }, 2000);
+  });
+
+  $("#colorHex").spectrum({
+    color: "#f00",
+    clickoutFiresChange: true,
+    preferredFormat: "hex"
+  });
+  $("#colorHex").show();
+  $("#colorHex").blur(function(){
+    $(this).spectrum("set", $(this).val());
   });
 });
