@@ -1,5 +1,5 @@
 // Saves options to chrome.storage
-function save_options() {
+function add_option() {
   var projectName = document.getElementById('projectName').value;
   var colorHex = document.getElementById('colorHex').value;
   if(projectName != "" && colorHex != ""){
@@ -43,4 +43,4 @@ function restore_options() {
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+document.getElementById('add').addEventListener('click', add_option);
