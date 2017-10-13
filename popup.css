@@ -2,19 +2,24 @@
   min-width: 250px;
   min-height: 300px;
 }
+
 .project-name {
   margin: 2px;
 }
+
 .delete-button, #add {
   float: right;
 }
+
 #sharing {
   width: 100%;
   text-align: center;
 }
+
 #sharing-options {
   display:none;
 }
+
 input::placeholder {
   color: #ccc;
 }
