@@ -5,7 +5,7 @@
 .project-name {
   margin: 2px;
 }
-.delete-button {
+.delete-button, #add {
   float: right;
 }
 #sharing {
