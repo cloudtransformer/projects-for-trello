@@ -1,15 +1,6 @@
 #container {
-  width: 400px;
+  min-width: 250px;
   min-height: 300px;
-}
-.project:empty {
-  display: none;
-}
-.color-swath{
-  width: 15px;
-  height: 15px;
-  margin: 2px;
-  display: inline-block;
 }
 .project-name{
   margin: 2px;
@@ -17,20 +8,10 @@
 .delete-button{
   float: right;
 }
-#add{
-  width: 100%;
-  margin: auto
-}
 #sharing{
   width: 100%;
   text-align: center;
 }
-#export-import{
-  display:none;
-}
-#import-copy{
-  display:none;
-}
-#import-save{
+#sharing-options{
   display:none;
 }

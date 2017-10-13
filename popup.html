@@ -11,37 +11,29 @@
   <body>
     <div id="container">
 
-      <form>
-        <label>
-          Project Name:
-        </label>
-        <input type="text" id="projectName" placeholder="Trello Extension">
-        <br />
-        <label>
-          Color:
-        </label>
-        <input type="text" id="colorHex" placeholder="red or #00FF00">
-
-        <button id="add">Add</button>
-      </form>
-
       <div id="list">
 
       </div>
 
-      <div id="list">
-
+      <div id="new">
+        <div>
+          <input type='text' id='new-color' class='spectrum' value='#000000' data-default="#000000">
+          <input type='text' id='new-project-name' value=''>
+        </div>
       </div>
+
       <div id="sharing">
         <div>
           <button id="import-export">Import/Export</button>
         </div>
-        <div>
-          <textarea id="export-import"></textarea>
-        </div>
-        <div>
-          <button id="import-copy">Copy</button>
-          <button id="import-save">Save</button>
+        <div id="sharing-options">
+          <div>
+            <textarea id="export-import"></textarea>
+          </div>
+          <div>
+            <button id="import-copy">Copy</button>
+            <button id="import-save">Save</button>
+          </div>
         </div>
       </div>
       <script src="options.js"></script>
