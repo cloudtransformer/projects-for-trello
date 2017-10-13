@@ -42,5 +42,44 @@ function restore_options() {
     });
   });
 }
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('add').addEventListener('click', add_option);
+function export_settings() {
+  $("#export-import").toggle();
+  $("#import-copy").toggle();
+  $("#import-save").toggle();
+  chrome.storage.sync.get(null, function(items) {
+    $("#export-import").val(JSON.stringify(items));
+  });
+}
+function import_settings() {
+  $("#export-import").toggle();
+  $("#import-copy").toggle();
+  $("#import-save").toggle();
+  var items = JSON.parse($("#export-import").val());
+  console.log(items);
+  chrome.storage.sync.clear(function () {});
+
+  for (item in items) {
+    console.log(item);
+    var _tmp = {}
+    _tmp[item] = items[item]
+    chrome.storage.sync.set(_tmp, function(){ });
+  }
+  $("#export-import").val("")
+  restore_options();
+}
+$(function(){
+  restore_options();
+  $('#add').click(add_option);
+  $('#import-export').click(export_settings);
+  $('#import-save').click(import_settings);
+
+  $("#import-copy").click(function () {
+    $("#export-import").select();
+    document.execCommand('copy');
+    $("#export-import").val("");
+    $("#export-import").attr("placeholder", "Copied to clipboard!");
+    setTimeout(function(){
+      $("#export-import").attr("placeholder", "");
+    }, 2000);
+  });
+});
