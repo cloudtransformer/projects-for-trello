@@ -78,10 +78,7 @@ $(function(){
     $("#export-import").select();
     document.execCommand('copy');
     $("#export-import").val("");
-    $("#export-import").attr("placeholder", "Copied to clipboard!");
-    setTimeout(function(){
-      $("#export-import").attr("placeholder", "");
-    }, 2000);
+    $("#export-import").attr("placeholder", "Copied to clipboard!").delay(2000).attr("placeholder", "");
   });
 
   $("#colorHex").spectrum({
