@@ -9,8 +9,8 @@ function save_option(projectName, bg_color, text_color) {
     _tmp[projectName.val()] = _colors;
     chrome.storage.sync.set(_tmp, function(){ });
     projectName.val('');
-    bg_color.val(bg_color.data('default'));
-    text_color.val("#ffffff");
+    bg_color.val("#000");
+    text_color.val("#fff");
     restore_options();
   }
 }
@@ -26,27 +26,33 @@ function delete_option(option) {
 function restore_options() {
   document.getElementById("list").innerHTML = '';
   chrome.storage.sync.get(null, function(items) {
-    // TODO: work on
     for (item in items) {
-
       var node = $('<div></div>');
       node.html("<div class='color-name-bg_color-group'>"+
         "<input type='text' class='spectrum bg-color' value='"+items[item]['bg']+"'>" +
-        "<input type='text' class='project-name' value='"+item+"'>"+
         "<input type='text' class='spectrum text-color' value='"+items[item]['text']+"'>" +
+        "<input type='text' class='project-name' value='"+item+"'>"+
         "</div>" +
         "<button class='delete-button' data-name='"+item+"'>X</button>");
       $('#list').append(node);
     }
-    $('.spectrum').spectrum({
+    $('.spectrum.bg-color, #new-bg-color').spectrum({
       clickoutFiresChange: true,
       showInput: true,
-      preferredFormat: "hex"
+      preferredFormat: "hex",
+      chooseText: "Set Background",
+    });
+    $('.spectrum.text-color').spectrum({
+      clickoutFiresChange: true,
+      showInput: true,
+      preferredFormat: "hex",
+      chooseText: "Set Text Color"
     });
     $('#new-text-color').spectrum({
       clickoutFiresChange: true,
       showInput: true,
       preferredFormat: "hex",
+      chooseText: "Set Text Color",
       color: "#ffffff"
     });
     $(".delete-button").click(function(){
@@ -77,7 +83,7 @@ function import_settings() {
   for (item in items) {
     var _tmp = {}
     _tmp[item] = items[item]
-    // chrome.storage.sync.set(_tmp, function(){ });
+    chrome.storage.sync.set(_tmp, function(){ });
   }
   $("#export-import").val("")
   restore_options();
