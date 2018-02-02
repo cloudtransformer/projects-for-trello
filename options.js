@@ -1,12 +1,16 @@
 // Saves options to chrome.storage
-function save_option(projectName, color) {
-  console.log(projectName.val(), color.val());
-  if(projectName.val() != "" && color.val() != ""){
-    var _tmp = {};
-    _tmp[projectName.val()] = color.val();
+function save_option(projectName, bg_color, text_color) {
+  console.log(projectName.val(), bg_color.val(), text_color.val());
+  if(projectName.val() != "" && bg_color.val() != "" && text_color.val() != ""){
+    var _tmp    = {};
+    var _colors = {};
+    _colors['bg']   = bg_color.val()
+    _colors['text'] = text_color.val()
+    _tmp[projectName.val()] = _colors;
     chrome.storage.sync.set(_tmp, function(){ });
     projectName.val('');
-    color.val(color.data('default'));
+    bg_color.val(bg_color.data('default'));
+    text_color.val("#ffffff");
     restore_options();
   }
 }
@@ -20,14 +24,17 @@ function delete_option(option) {
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-    document.getElementById("list").innerHTML = '';
-  // Use default value color = 'red' and likesColor = true.
+  document.getElementById("list").innerHTML = '';
   chrome.storage.sync.get(null, function(items) {
     // TODO: work on
     for (item in items) {
+
       var node = $('<div></div>');
-      node.html("<div class='color-name-group'><input type='text' class='spectrum color' value='"+items[item]+"'>" +
-        "<input type='text' class='project-name' value='"+item+"'></div>" +
+      node.html("<div class='color-name-bg_color-group'>"+
+        "<input type='text' class='spectrum bg-color' value='"+items[item]['bg']+"'>" +
+        "<input type='text' class='project-name' value='"+item+"'>"+
+        "<input type='text' class='spectrum text-color' value='"+items[item]['text']+"'>" +
+        "</div>" +
         "<button class='delete-button' data-name='"+item+"'>X</button>");
       $('#list').append(node);
     }
@@ -36,14 +43,23 @@ function restore_options() {
       showInput: true,
       preferredFormat: "hex"
     });
+    $('#new-text-color').spectrum({
+      clickoutFiresChange: true,
+      showInput: true,
+      preferredFormat: "hex",
+      color: "#ffffff"
+    });
     $(".delete-button").click(function(){
       delete_option($(this).data("name"));
     });
     $(".project-name").change(function(){
-      save_option($(this), $(this).parent().children('.spectrum'));
+      save_option($(this), $(this).parent().children('.spectrum.bg-color'), $(this).parent().children('.spectrum.text-color'));
     });
-    $(".color").change(function(){
-      save_option($(this).parent().children('.project-name'), $(this));
+    $(".text-color").change(function(){
+      save_option($(this).parent().children('.project-name'), $(this).parent().children('.spectrum.bg-color'), $(this))
+    });
+    $(".bg-color").change(function(){
+      save_option($(this).parent().children('.project-name'), $(this), $(this).parent().children('.spectrum.text-color'));
     });
   });
 }
@@ -56,14 +72,12 @@ function export_settings() {
 function import_settings() {
   $("#sharing-options").toggle();
   var items = JSON.parse($("#export-import").val());
-  console.log(items);
   chrome.storage.sync.clear(function () {});
 
   for (item in items) {
-    console.log(item);
     var _tmp = {}
     _tmp[item] = items[item]
-    chrome.storage.sync.set(_tmp, function(){ });
+    // chrome.storage.sync.set(_tmp, function(){ });
   }
   $("#export-import").val("")
   restore_options();
@@ -71,7 +85,7 @@ function import_settings() {
 $(function(){
   restore_options();
   $('#add').click(function(){
-    save_option($('#new-project-name'), $('#new-color'));
+    save_option($('#new-project-name'), $('#new-bg-color'), $('#new-text-color'));
   });
   $('#import-export').click(export_settings);
   $('#import-save').click(import_settings);
