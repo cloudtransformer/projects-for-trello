@@ -16,12 +16,12 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* end Meyer Reset */
@@ -41,8 +41,20 @@ body {
 
 #container {
   padding: .5rem;
-  min-width: 250px;
+  min-width: 265px;
   min-height: 300px;
+}
+.label-group span:first-child{
+  margin-left:6px;
+}
+.label-group span:nth-child(2){
+  margin-left:10px;
+}
+.label-group span:nth-child(3){
+  margin-left:14px;
+}
+.sp-preview{
+  margin-right: 0px;
 }
 
 #list > div, #new > div {
@@ -59,6 +71,7 @@ body {
   background: none;
   padding: 0;
   border: none;
+  padding-left: 2px;
 }
 
 .project-name {
@@ -77,4 +90,7 @@ body {
 
 input::placeholder {
   color: #ccc;
+}
+textarea {
+  width: 100%;
 }
