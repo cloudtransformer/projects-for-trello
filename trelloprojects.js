@@ -6,7 +6,8 @@ $(function() {
 
 
 var colorList = ["blue", "red", "green", "MediumVioletRed ", "gray", "orange"];
-var defaultColor = "#801b00";
+var defaultBackgroundColor = "#ffffff";
+var defaultTextColor = "#801b00";
 var usedColors = colorList.slice(0);
 
 
@@ -148,31 +149,14 @@ function ListCard(el) {
     if (card_badge!=undefined && card_badge.text()!="") {
       card_badge.addClass(card_badge.text());
       var _card_badge = {};
-      _card_badge[card_badge.text()] = defaultColor;
-
-      chrome.storage.sync.get(_card_badge, function(items) {
-        // default color #801b00
-
-        var colorSet = items[card_badge.text()];
-        if (items[card_badge.text()]==defaultColor)
-          {
-
-            var colorSet=usedColors.pop();
-
-            if (colorSet==undefined){
-              usedColors = shuffle(colorList.slice(0));
-              colorSet = usedColors.pop();
-
-            }
-            var _card_badge = {}
-            _card_badge[card_badge.text()] = colorSet;
-            chrome.storage.sync.set(_card_badge, function() {
-
-            });
-
-          }
-          if (card_badge!=undefined)
-            card_badge.attr("style", "background-color: " + colorSet+ " !important");
+      chrome.storage.sync.get(null, function(items) {
+        if (items[label]!=undefined){
+        var colorText       = items[label]['text'];
+        var backgroundColor = items[label]['bg'];
+          card_badge.attr("style",
+            "background-color: " + backgroundColor+ " !important;"+
+            "color:"+colorText+"!important;");
+        }
       });
     }
   }
