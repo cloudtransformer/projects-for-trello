@@ -6,7 +6,7 @@ function save_option(projectName, bg_color, text_color) {
     var _colors = {};
     _colors['bg']   = bg_color.val()
     _colors['text'] = text_color.val()
-    _tmp[projectName.val()] = _colors;
+    _tmp[projectName.val().toLowerCase()] = _colors;
     chrome.storage.sync.set(_tmp, function(){ });
     projectName.val('');
     bg_color.val("#000");

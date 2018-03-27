@@ -150,9 +150,9 @@ function ListCard(el) {
       card_badge.addClass(card_badge.text());
       var _card_badge = {};
       chrome.storage.sync.get(null, function(items) {
-        if (items[label]!=undefined){
-        var colorText       = items[label]['text'];
-        var backgroundColor = items[label]['bg'];
+        if (items[label.toLowerCase()]!=undefined){
+        var colorText       = items[label.toLowerCase()]['text'];
+        var backgroundColor = items[label.toLowerCase()]['bg'];
           card_badge.attr("style",
             "background-color: " + backgroundColor+ " !important;"+
             "color:"+colorText+"!important;");

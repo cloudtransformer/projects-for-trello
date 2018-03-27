@@ -4,20 +4,12 @@ $(function() {
   $( "#filterTrello" ).click(function() {
     var _tTmp = window.prompt("Insert the terms to filter","ALL");
     console.log(_tTmp);
-    if (_tTmp=="ALL")
-      {
-        var divs = $(".list-card").show();
-      }
-      else
-        {
-          var divs = $(".list-card").hide();
-          var divs = $(".list-card:has(."+_tTmp+")").show();
-
-        }
-
+    if (_tTmp=="ALL") {
+      var divs = $(".list-card").show();
+    }
+    else {
+      var divs = $(".list-card").hide();
+      var divs = $(".list-card:has(."+_tTmp+")").show();
+    }
   });
-
 });
-
-
-
