@@ -21,7 +21,8 @@ as a badge in the lower left corner of the card. Projects for Trello also suppor
 
 Versions
 --------
-1.3 allows for custom BG and Text colors and save labels case insensitive.
+1.3  Code of conduct added
+1.3.1 allows for custom BG and Text colors and save labels case insensitive.
 
 Credits
 -------
