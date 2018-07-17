@@ -29,6 +29,7 @@ time, mark, audio, video {
 body {
   border-radius: 10px;
   font-family: "proxima-nova", Arial, sans-serif;
+  background-image: url(galaxy.png);
 }
 
 #header {
@@ -88,9 +89,29 @@ body {
   margin-top: .5rem;
 }
 
+#import-export {
+  padding: 5px;
+  color: #fff;
+  background-color: #0087bf;
+  border-color: #0087bf;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 input::placeholder {
   color: #ccc;
 }
 textarea {
   width: 100%;
 }
+
+.fa-times {
+  color: red;
+}
+
+.fa-check {
+  color: green;
+}
+
+
