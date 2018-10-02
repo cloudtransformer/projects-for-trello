@@ -33,7 +33,7 @@ function restore_options() {
         "<input type='text' class='spectrum text-color' value='"+items[item]['text']+"'>" +
         "<input type='text' class='project-name' value='"+item+"'>"+
         "</div>" +
-        "<button class='delete-button' data-name='"+item+"'><i><i class='fas fa-times'></i></button>");
+        "<button class='delete-button' data-name='"+item+"'><i><i class='far fa-trash-alt'></i></button>");
       $('#list').append(node);
     }
     $('.spectrum.bg-color, #new-bg-color').spectrum({
