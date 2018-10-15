@@ -21,9 +21,9 @@ as a badge in the lower left corner of the card. Projects for Trello also suppor
 
 Versions
 --------
-1.3   Code of conduct added
-1.3.1 Custom BG and Text colors, {project} names are cAsE-insensitive.
-1.4   FontAwesome 5 icons, additional styling
+- 1.3: Code of conduct added
+- 1.3.1: Custom BG and Text colors, {project} names are cAsE-insensitive
+- 1.4: FontAwesome 5 icons, additional styling
 
 Credits
 -------
